@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BITEZEE – Community Impact</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#81BFB7;--gd:#5aa39b;--gl:#b8ddd9;--gll:#e0f2ef;
+  --pink:#F3A2BE;--pd:#e07fa3;--pl:#fbd5e6;--pll:#fef0f6;
+  --cream:#FDF8F4;--dark:#141820;--text:#1e2028;--muted:#7a7a8a;
+  --gold:#f39c12;--r:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+.shine{background:linear-gradient(120deg,var(--gd) 0%,var(--green) 30%,var(--pink) 55%,var(--pd) 75%,var(--gd) 100%);background-size:250% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 4s linear infinite}
+@keyframes shine{to{background-position:250% center}}
+.shine-pink{background:linear-gradient(120deg,var(--pd) 0%,var(--pink) 35%,var(--green) 60%,var(--gd) 85%,var(--pd) 100%);background-size:250% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 3.5s linear infinite}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:16px 5%;background:rgba(253,248,244,.86);backdrop-filter:blur(20px);border-bottom:1px solid rgba(129,191,183,.18)}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(135deg,var(--gd),var(--pd));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem;transition:color .2s}
+.nav-links a:hover{color:var(--gd)}
+.nav-links a.active{color:var(--gd);font-weight:700}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* HERO */
+#hero{min-height:62vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:130px 5% 70px;position:relative;overflow:hidden;background:var(--dark)}
+#hero::before{content:'';position:absolute;top:-100px;right:-80px;width:460px;height:460px;background:var(--green);border-radius:50%;filter:blur(120px);opacity:.1;pointer-events:none}
+#hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:360px;height:360px;background:var(--pink);border-radius:50%;filter:blur(110px);opacity:.09;pointer-events:none}
+.hero-left{position:relative;z-index:2}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(129,191,183,.15);color:var(--gl);padding:8px 20px;border-radius:50px;font-size:.8rem;font-weight:600;margin-bottom:22px;border:1px solid rgba(129,191,183,.22);animation:fadeUp .6s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero-title{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);line-height:1.06;font-weight:900;color:#fff;margin-bottom:18px;animation:fadeUp .7s .1s ease both}
+.hero-sub{font-size:.98rem;color:rgba(255,255,255,.4);line-height:1.8;max-width:440px;animation:fadeUp .7s .2s ease both}
+
+/* LIVE COUNTER CARDS */
+.live-counters{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;position:relative;z-index:2;animation:fadeUp .8s .3s ease both}
+.lc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:20px 18px;backdrop-filter:blur(10px);transition:background .2s}
+.lc:hover{background:rgba(255,255,255,.1)}
+.lc-icon{font-size:1.6rem;margin-bottom:10px;display:block}
+.lc-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;line-height:1;margin-bottom:4px}
+.lc-lbl{font-size:.74rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.7px}
+.lc.g .lc-num{color:var(--gl)}
+.lc.pk .lc-num{color:var(--pl)}
+.lc.o .lc-num{color:#feca75}
+.lc.b .lc-num{color:#a8e6cf}
+
+/* MAIN */
+.main{padding:60px 5%}
+.section-eyebrow{font-size:.76rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--pd);margin-bottom:10px}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:900;line-height:1.12;margin-bottom:36px}
+
+/* BIG IMPACT GRID */
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:64px}
+.ic{background:#fff;border-radius:var(--r);padding:30px 22px;position:relative;overflow:hidden;box-shadow:0 2px 18px rgba(0,0,0,.05);transition:transform .35s,box-shadow .35s}
+.ic:hover{transform:translateY(-6px);box-shadow:0 16px 44px rgba(0,0,0,.1)}
+.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.ic.g::before{background:var(--green)}
+.ic.pk::before{background:var(--pink)}
+.ic.o::before{background:var(--gold)}
+.ic.b::before{background:#27ae60}
+.ic .ico{font-size:2.2rem;margin-bottom:14px;display:block}
+.ic .num{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:900;line-height:1;margin-bottom:4px}
+.ic.g .num{color:var(--gd)}
+.ic.pk .num{color:var(--pd)}
+.ic.o .num{color:var(--gold)}
+.ic.b .num{color:#27ae60}
+.ic .lbl{font-weight:700;font-size:.88rem;margin-bottom:5px}
+.ic .desc{font-size:.78rem;color:var(--muted);line-height:1.55}
+
+/* CARBON PROGRESS */
+.carbon-section{background:var(--dark);border-radius:24px;padding:40px;margin-bottom:64px;position:relative;overflow:hidden}
+.carbon-section::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:var(--green);border-radius:50%;filter:blur(100px);opacity:.12}
+.carbon-section::after{content:'';position:absolute;bottom:-60px;left:-60px;width:240px;height:240px;background:var(--pink);border-radius:50%;filter:blur(90px);opacity:.1}
+.cs-inner{position:relative;z-index:1}
+.cs-head{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;align-items:center}
+.cs-title{font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:900;color:#fff;margin-bottom:8px}
+.cs-sub{color:rgba(255,255,255,.38);font-size:.88rem;line-height:1.7}
+.co2-big{text-align:center}
+.co2-num{font-family:'Fraunces',serif;font-size:clamp(3rem,6vw,5rem);font-weight:900;line-height:1;margin-bottom:4px}
+.co2-unit{font-size:1rem;color:rgba(255,255,255,.4)}
+.progress-bars{display:flex;flex-direction:column;gap:16px}
+.pb-row{display:flex;flex-direction:column;gap:6px}
+.pb-label{display:flex;justify-content:space-between;font-size:.8rem;color:rgba(255,255,255,.55)}
+.pb-track{height:10px;background:rgba(255,255,255,.08);border-radius:50px;overflow:hidden}
+.pb-fill{height:100%;border-radius:50px;transition:width 1.8s ease}
+.pb-g{background:linear-gradient(90deg,var(--gd),var(--gl))}
+.pb-pk{background:linear-gradient(90deg,var(--pd),var(--pink))}
+.pb-o{background:linear-gradient(90deg,#f39c12,#feca75)}
+
+/* EQUIVALENTS */
+.equiv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.eq{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 14px;text-align:center;transition:background .2s}
+.eq:hover{background:rgba(255,255,255,.09)}
+.eq-icon{font-size:2rem;margin-bottom:8px;display:block}
+.eq-num{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--gl)}
+.eq-lbl{font-size:.73rem;color:rgba(255,255,255,.35);margin-top:3px;line-height:1.4}
+
+/* LEADERBOARD */
+.lb-section{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:64px}
+.lb-card{background:#fff;border-radius:var(--r);box-shadow:0 4px 24px rgba(0,0,0,.06);overflow:hidden}
+.lb-head{padding:22px 24px;border-bottom:1px solid rgba(0,0,0,.05);display:flex;align-items:center;justify-content:space-between}
+.lb-head h3{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900}
+.lb-badge{background:var(--gll);color:var(--gd);font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:50px}
+.lb-row{display:flex;align-items:center;gap:13px;padding:13px 24px;border-bottom:1px solid rgba(0,0,0,.04);transition:background .2s;cursor:default}
+.lb-row:last-child{border-bottom:none}
+.lb-row:hover{background:var(--gll)}
+.lb-row.top{background:linear-gradient(135deg,rgba(129,191,183,.08),rgba(243,162,190,.06))}
+.lb-rank{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:900;width:36px;text-align:center;flex-shrink:0}
+.r1{color:var(--gold)}
+.r2{color:#95a5a6}
+.r3{color:#cd6133}
+.lb-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-weight:700;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-meta{font-size:.71rem;color:var(--muted);margin-top:2px}
+.lb-val{font-family:'Fraunces',serif;font-size:.98rem;font-weight:900;flex-shrink:0;text-align:right}
+.lv-g{color:var(--gd)}
+.lv-o{color:var(--gold)}
+.lv-pk{color:var(--pd)}
+
+/* DONOR PROFILES */
+.donors-section{margin-bottom:64px}
+.donors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.donor-card{background:#fff;border-radius:var(--r);padding:22px 16px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;cursor:default;position:relative}
+.donor-card:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.1)}
+.donor-card.featured{border:2px solid var(--gold)}
+.featured-crown{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:50px}
+.d-avatar{width:58px;height:58px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700}
+.d-name{font-weight:700;font-size:.9rem;margin-bottom:3px}
+.d-role{font-size:.72rem;color:var(--muted);margin-bottom:10px}
+.d-stats{display:flex;justify-content:center;gap:12px}
+.d-stat{text-align:center}
+.d-stat-num{font-family:'Fraunces',serif;font-size:1rem;font-weight:900;color:var(--gd)}
+.d-stat-lbl{font-size:.64rem;color:var(--muted)}
+.d-badge{display:inline-block;background:var(--gll);color:var(--gd);font-size:.66rem;font-weight:700;padding:3px 9px;border-radius:50px;margin-top:10px}
+
+/* TIMELINE */
+.timeline-section{margin-bottom:64px}
+.tl{max-width:680px;margin:0 auto;display:flex;flex-direction:column;position:relative}
+.tl::before{content:'';position:absolute;left:25px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--green),var(--pink))}
+.tl-item{display:flex;gap:24px;padding:22px 0;opacity:0;transform:translateX(-18px);transition:opacity .6s,transform .6s}
+.tl-item.visible{opacity:1;transform:none}
+.tl-dot{width:52px;height:52px;min-width:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;position:relative;z-index:1}
+.tl-dot.g{background:var(--gll)}
+.tl-dot.p{background:var(--pll)}
+.tl-body h3{font-family:'Fraunces',serif;font-size:1rem;margin-bottom:5px}
+.tl-body p{color:var(--muted);font-size:.84rem;line-height:1.62}
+.tl-body .tl-tag{display:inline-block;background:var(--gll);color:var(--gd);font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:50px;margin-top:6px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* CONFETTI */
+.conf{position:fixed;pointer-events:none;z-index:9999;border-radius:2px;animation:cFall linear both}
+@keyframes cFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding-top:100px}
+  .live-counters{display:none}
+  .impact-grid{grid-template-columns:1fr 1fr}
+  .lb-section{grid-template-columns:1fr}
+  .cs-head{grid-template-columns:1fr}
+  .equiv-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .impact-grid{grid-template-columns:1fr}
+  .equiv-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">BITEZEE</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/order">Order Food</a></li>
+    <li><a href="/donate">Donate</a></li>
+    <li><a href="/impact" class="active">🌍 Impact</a></li>
+    <li><a href="/rewards">Rewards</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">🌍 Community Impact Dashboard</div>
+    <h1 class="hero-title">Every meal saved<br><span class="shine">heals the planet.</span></h1>
+    <p class="hero-sub">Real numbers. Real impact. See exactly how much food, carbon, and hunger BITEZEE has tackled — together, as a community.</p>
+  </div>
+  <div class="live-counters">
+    <div class="lc g">
+      <span class="lc-icon">🍽️</span>
+      <div class="lc-num" id="hc1">0</div>
+      <div class="lc-lbl">Meals Rescued</div>
+    </div>
+    <div class="lc pk">
+      <span class="lc-icon">🌱</span>
+      <div class="lc-num" id="hc2">0 kg</div>
+      <div class="lc-lbl">CO₂ Saved</div>
+    </div>
+    <div class="lc o">
+      <span class="lc-icon">💰</span>
+      <div class="lc-num" id="hc3">₹0</div>
+      <div class="lc-lbl">Money Saved</div>
+    </div>
+    <div class="lc b">
+      <span class="lc-icon">💧</span>
+      <div class="lc-num" id="hc4">0 L</div>
+      <div class="lc-lbl">Water Saved</div>
+    </div>
+  </div>
+</section>
+
+<div class="main">
+
+  <!-- BIG STATS -->
+  <div class="section-eyebrow">TOTAL IMPACT</div>
+  <h2 class="section-title">BITEZEE by the <span class="shine">numbers</span></h2>
+  <div class="impact-grid">
+    <div class="ic g reveal">
+      <span class="ico">🍽️</span>
+      <div class="num counter" data-target="1247">0</div>
+      <div class="lbl">Meals Rescued</div>
+      <div class="desc">From restaurants, homes & events across Tamil Nadu.</div>
+    </div>
+    <div class="ic pk reveal">
+      <span class="ico">🌱</span>
+      <div class="num" id="co2Num">0 kg</div>
+      <div class="lbl">CO₂ Emissions Prevented</div>
+      <div class="desc">Food waste in landfills releases methane — we stopped it.</div>
+    </div>
+    <div class="ic o reveal">
+      <span class="ico">💰</span>
+      <div class="num" id="savedNum">₹0</div>
+      <div class="lbl">Total Money Saved</div>
+      <div class="desc">Buyers paid less. Donors recovered cost. Everyone wins.</div>
+    </div>
+    <div class="ic b reveal">
+      <span class="ico">💧</span>
+      <div class="num" id="waterNum">0 L</div>
+      <div class="lbl">Water Footprint Reduced</div>
+      <div class="desc">Every kg of food has an embedded water cost. We saved it.</div>
+    </div>
+  </div>
+
+  <!-- CARBON SECTION -->
+  <div class="carbon-section reveal">
+    <div class="cs-inner">
+      <div class="cs-head">
+        <div>
+          <div class="section-eyebrow" style="color:var(--gl)">CARBON TRACKER</div>
+          <div class="cs-title">Carbon emissions<br><span class="shine">we've prevented</span></div>
+          <p class="cs-sub">Each rescued meal prevents approximately 2.5 kg of CO₂ from entering the atmosphere. Food waste is the 3rd largest source of greenhouse gas globally.</p>
+          <div class="progress-bars" style="margin-top:20px">
+            <div class="pb-row">
+              <div class="pb-label"><span>Restaurant donations</span><span id="pb1lbl">0 kg</span></div>
+              <div class="pb-track"><div class="pb-fill pb-g" id="pb1" style="width:0%"></div></div>
+            </div>
+            <div class="pb-row">
+              <div class="pb-label"><span>Home / individual donors</span><span id="pb2lbl">0 kg</span></div>
+              <div class="pb-track"><div class="pb-fill pb-pk" id="pb2" style="width:0%"></div></div>
+            </div>
+            <div class="pb-row">
+              <div class="pb-label"><span>Event / catering donations</span><span id="pb3lbl">0 kg</span></div>
+              <div class="pb-track"><div class="pb-fill pb-o" id="pb3" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="co2-big">
+          <div class="co2-num"><span class="shine" id="bigCO2">0</span></div>
+          <div class="co2-unit">kg CO₂ prevented</div>
+          <div style="margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.35);line-height:1.7">Equivalent to driving<br><strong style="color:var(--gl)" id="kmEq">0 km</strong> in a car</div>
+        </div>
+      </div>
+      <div class="equiv-grid">
+        <div class="eq">
+          <span class="eq-icon">🌳</span>
+          <div class="eq-num" id="treesEq">0</div>
+          <div class="eq-lbl">Trees worth of CO₂<br>absorbed in a year</div>
+        </div>
+        <div class="eq">
+          <span class="eq-icon">✈️</span>
+          <div class="eq-num" id="flightsEq">0</div>
+          <div class="eq-lbl">Short-haul flights<br>worth of emissions</div>
+        </div>
+        <div class="eq">
+          <span class="eq-icon">💡</span>
+          <div class="eq-num" id="daysEq">0</div>
+          <div class="eq-lbl">Days of home electricity<br>equivalent</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="section-eyebrow">HALL OF FAME</div>
+  <h2 class="section-title">Community <span class="shine-pink">leaderboard</span></h2>
+  <div class="lb-section">
+    <!-- Top Donors -->
+    <div class="lb-card reveal">
+      <div class="lb-head">
+        <h3>🍳 Top Food Donors</h3>
+        <span class="lb-badge">This Month</span>
+      </div>
+      <div id="donorLB"></div>
+    </div>
+    <!-- Top Food Savers -->
+    <div class="lb-card reveal">
+      <div class="lb-head">
+        <h3>🙋 Top Food Rescuers</h3>
+        <span class="lb-badge">This Month</span>
+      </div>
+      <div id="saverLB"></div>
+    </div>
+  </div>
+
+  <!-- DONOR PROFILES -->
+  <div class="donors-section">
+    <div class="section-eyebrow">STAR DONORS</div>
+    <h2 class="section-title">Meet the people <span class="shine">fighting food waste</span></h2>
+    <div class="donors-grid" id="donorCards"></div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <div class="section-eyebrow">RECENT RESCUES</div>
+    <h2 class="section-title">Food rescued <span class="shine-pink">today</span></h2>
+    <div class="tl" id="rescueTL"></div>
+  </div>
+
+</div>
+
+<script>
+const donors=[
+  {n:'Sri Murugan Mess',role:'Restaurant',meals:248,kg:62,pts:2480,av:'🏠',bg:'linear-gradient(135deg,var(--gd),#3d8a82)',featured:true,badge:'Top Donor'},
+  {n:'Annapoorna Hotel',role:'Restaurant',meals:192,kg:48,pts:1920,av:'🍽️',bg:'linear-gradient(135deg,var(--pd),var(--pink))',featured:false,badge:''},
+  {n:'Arjun Kumar',role:'Individual',meals:84,kg:21,pts:840,av:'👤',bg:'linear-gradient(135deg,#4285f4,#34a853)',featured:false,badge:'Rising Star'},
+  {n:"Farouk's Kitchen",role:'Restaurant',meals:137,kg:34,pts:1370,av:'🥘',bg:'linear-gradient(135deg,#f39c12,#e67e22)',featured:false,badge:''},
+  {n:'Green Leaf Cafe',role:'Restaurant',meals:96,kg:24,pts:960,av:'🌿',bg:'linear-gradient(135deg,#27ae60,#2ecc71)',featured:false,badge:''},
+  {n:'Priya Sharma',role:'Individual',meals:62,kg:15.5,pts:620,av:'🙋',bg:'linear-gradient(135deg,var(--pink),var(--pd))',featured:false,badge:''},
+];
+
+const rescuers=[
+  {n:'Nanmai Illam NGO',role:'NGO',meals:310,kg:77.5,av:'🏠',bg:'linear-gradient(135deg,var(--gd),#81BFB7)'},
+  {n:'Hope Foundation',role:'NGO',meals:228,kg:57,av:'❤️',bg:'linear-gradient(135deg,var(--pd),var(--pink))'},
+  {n:'Ravi (Volunteer)',role:'Buyer',meals:142,kg:35.5,av:'🙋',bg:'linear-gradient(135deg,#4285f4,#34a853)'},
+  {n:'Asha Nivas',role:'NGO',meals:98,kg:24.5,av:'🧒',bg:'linear-gradient(135deg,#f39c12,#feca75)'},
+  {n:'Meena Krishnan',role:'Buyer',meals:74,kg:18.5,av:'👩',bg:'linear-gradient(135deg,#9b59b6,#8e44ad)'},
+  {n:'Sundaram T.',role:'Buyer',meals:58,kg:14.5,av:'👨',bg:'linear-gradient(135deg,#1abc9c,#16a085)'},
+  {n:'Anbagam Home',role:'NGO',meals:46,kg:11.5,av:'🧓',bg:'linear-gradient(135deg,#e67e22,#d35400)'},
+  {n:'Vikram K.',role:'Buyer',meals:38,kg:9.5,av:'👤',bg:'linear-gradient(135deg,#2c3e50,#34495e)'},
+];
+
+const timeline=[
+  {e:'🫓',who:'Sri Murugan Mess',food:'Plain Dosa (×20)',ngo:'Nanmai Illam',time:'12 mins ago',meals:20,dot:'g'},
+  {e:'🍛',who:'Annapoorna Hotel',food:'Veg Meals (×15)',ngo:'Hope Foundation',time:'34 mins ago',meals:15,dot:'p'},
+  {e:'🥐',who:'Arya Bhavan Bakery',food:'Bread & Puffs (×12)',ngo:'Asha Nivas',time:'1 hr ago',meals:12,dot:'g'},
+  {e:'🍚',who:'Priya Sharma (Home)',food:'Sambar Rice (×8)',ngo:'Anbagam Home',time:'2 hrs ago',meals:8,dot:'p'},
+  {e:'🌯',who:"Farouk's Kitchen",food:'Shawarma (×10)',ngo:'Free pickup',time:'3 hrs ago',meals:10,dot:'g'},
+];
+
+// Totals
+const totalMeals=1247;
+const totalCO2=(totalMeals*2.5).toFixed(0);
+const totalMoney=totalMeals*147;
+const totalWater=Math.round(totalMeals*500/1000);
+
+function animNum(el,target,dur,fmt){
+  if(!el||el.dataset.done)return;
+  el.dataset.done='1';
+  const step=target/(dur/16);let cur=0;
+  const t=setInterval(()=>{
+    cur=Math.min(cur+step,target);
+    const v=Math.floor(cur);
+    el.textContent=fmt?fmt(v):v;
+    if(cur>=target)clearInterval(t);
+  },16);
+}
+
+function init(){
+  // hero counters
+  setTimeout(()=>{
+    animNum(document.getElementById('hc1'),totalMeals,1800,v=>v.toLocaleString());
+    setTimeout(()=>animNum(document.getElementById('hc2'),+totalCO2,1600,v=>v+' kg'),200);
+    setTimeout(()=>animNum(document.getElementById('hc3'),totalMoney,1700,v=>'₹'+v.toLocaleString()),300);
+    setTimeout(()=>animNum(document.getElementById('hc4'),totalWater,1600,v=>v+' L'),400);
+  },600);
+
+  // big CO2
+  setTimeout(()=>{
+    animNum(document.getElementById('bigCO2'),+totalCO2,2000);
+    document.getElementById('kmEq').textContent=Math.round(+totalCO2*4).toLocaleString()+' km';
+    document.getElementById('treesEq').textContent=Math.round(+totalCO2/21);
+    document.getElementById('flightsEq').textContent=Math.round(+totalCO2/90);
+    document.getElementById('daysEq').textContent=Math.round(+totalCO2/1.2).toLocaleString();
+    document.getElementById('co2Num').textContent=totalCO2+' kg';
+    document.getElementById('savedNum').textContent='₹'+totalMoney.toLocaleString();
+    document.getElementById('waterNum').textContent=totalWater.toLocaleString()+' L';
+    // progress bars
+    setTimeout(()=>{
+      document.getElementById('pb1').style.width='72%';
+      document.getElementById('pb1lbl').textContent=Math.round(+totalCO2*.72)+' kg';
+      document.getElementById('pb2').style.width='45%';
+      document.getElementById('pb2lbl').textContent=Math.round(+totalCO2*.45)+' kg';
+      document.getElementById('pb3').style.width='28%';
+      document.getElementById('pb3lbl').textContent=Math.round(+totalCO2*.28)+' kg';
+    },400);
+  },1000);
+
+  // Leaderboards
+  const medals=['🥇','🥈','🥉'];
+  const rankColors=['r1','r2','r3'];
+  function renderLB(id,data,valKey,valFmt){
+    document.getElementById(id).innerHTML=data.map((r,i)=>`
+      <div class="lb-row${i<3?' top':''}">
+        <div class="lb-rank ${rankColors[i]||''}">${i<3?medals[i]:i+1}</div>
+        <div class="lb-av" style="background:${r.bg}">${r.av}</div>
+        <div class="lb-info">
+          <div class="lb-name">${r.n}</div>
+          <div class="lb-meta">${r.role} · ${r.meals} meals</div>
+        </div>
+        <div class="lb-val lv-${i===0?'o':i===1?'g':'pk'}">${valFmt(r[valKey])}</div>
+      </div>
+    `).join('');
+  }
+  renderLB('donorLB',donors,'meals',v=>v+' meals');
+  renderLB('saverLB',rescuers,'meals',v=>v+' saved');
+
+  // Donor cards
+  document.getElementById('donorCards').innerHTML=donors.map(d=>`
+    <div class="donor-card${d.featured?' featured':''}">
+      ${d.featured?'<div class="featured-crown">⭐ Star Donor</div>':''}
+      <div class="d-avatar" style="background:${d.bg}">${d.av}</div>
+      <div class="d-name">${d.n}</div>
+      <div class="d-role">${d.role}</div>
+      <div class="d-stats">
+        <div class="d-stat"><div class="d-stat-num">${d.meals}</div><div class="d-stat-lbl">Meals</div></div>
+        <div class="d-stat"><div class="d-stat-num">${d.kg}kg</div><div class="d-stat-lbl">CO₂ saved</div></div>
+      </div>
+      ${d.badge?`<div class="d-badge">${d.badge}</div>`:''}
+    </div>
+  `).join('');
+
+  // Timeline
+  document.getElementById('rescueTL').innerHTML=timeline.map(t=>`
+    <div class="tl-item">
+      <div class="tl-dot ${t.dot}">${t.e}</div>
+      <div class="tl-body">
+        <h3>${t.food} — ${t.who}</h3>
+        <p>Donated to <strong>${t.ngo}</strong> · ${t.time}</p>
+        <span class="tl-tag">🍽️ ${t.meals} meals rescued · 🌱 ${(t.meals*2.5).toFixed(1)} kg CO₂ saved</span>
+      </div>
+    </div>
+  `).join('');
+
+  // Observers
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.counter').forEach(el=>animNum(el,+el.dataset.target,1500));
+      obs.unobserve(e.target);
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal,.tl-item').forEach(el=>obs.observe(el));
+}
+
+init();
+</script>
+</body>
+</html>

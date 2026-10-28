@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BITEZEE – Don't Waste. Share the Taste.</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green:#81BFB7; --gd:#5aa39b; --gl:#b8ddd9; --gll:#e0f2ef;
+  --pink:#F3A2BE; --pd:#e07fa3; --pl:#fbd5e6; --pll:#fef0f6;
+  --cream:#FDF8F4; --dark:#141820; --text:#1e2028; --muted:#7a7a8a;
+  --r:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+.shine {
+  background: linear-gradient(120deg, var(--gd) 0%, var(--green) 30%, var(--pink) 55%, var(--pd) 75%, var(--gd) 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 4s linear infinite;
+}
+@keyframes shine { to { background-position: 250% center; } }
+
+.shine-pink {
+  background: linear-gradient(120deg, var(--pd) 0%, var(--pink) 35%, var(--green) 60%, var(--gd) 85%, var(--pd) 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 3.5s linear infinite;
+}
+
+nav {
+  position:fixed;top:0;width:100%;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 5%;
+  background:rgba(253,248,244,0.84);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(129,191,183,0.18);
+}
+.nav-logo {
+  font-family:'Fraunces',serif;font-size:1.9rem;font-weight:900;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,var(--gd),var(--pd));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.88rem;transition:color .2s}
+.nav-links a:hover{color:var(--gd)}
+.lang-toggle{display:flex;gap:8px}
+.lang-btn{
+  padding:6px 16px;border-radius:50px;
+  border:1.5px solid var(--green);background:transparent;cursor:pointer;
+  font-size:.8rem;font-weight:600;color:var(--gd);transition:all .2s;
+  font-family:'Outfit',sans-serif;
+}
+.lang-btn.active,.lang-btn:hover{background:var(--green);color:#fff;border-color:var(--green)}
+
+#hero {
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  padding:120px 5% 80px;position:relative;overflow:hidden;
+}
+.hero-bg {
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 600px 500px at 85% -5%, rgba(129,191,183,.2) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 8% 92%, rgba(243,162,190,.16) 0%, transparent 70%);
+}
+.blob {
+  position:absolute;border-radius:50%;filter:blur(72px);pointer-events:none;
+  animation:floatBlob 8s ease-in-out infinite;
+}
+.blob1{width:320px;height:320px;background:var(--green);opacity:.26;top:-60px;right:10%;animation-delay:0s}
+.blob2{width:260px;height:260px;background:var(--pink);opacity:.22;bottom:40px;left:5%;animation-delay:-3s}
+.blob3{width:180px;height:180px;background:var(--green);opacity:.16;top:40%;right:4%;animation-delay:-5s}
+@keyframes floatBlob{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-28px) scale(1.06)}
+}
+
+.hero-text{position:relative;z-index:2}
+.hero-badge {
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--pl);color:var(--pd);
+  padding:8px 20px;border-radius:50px;
+  font-size:.8rem;font-weight:600;margin-bottom:28px;
+  animation:fadeUp .6s ease both;
+}
+.hero-title {
+  font-family:'Fraunces',serif;
+  font-size:clamp(3rem,5.5vw,5rem);
+  line-height:1.08;font-weight:900;
+  margin-bottom:22px;
+  animation:fadeUp .7s .1s ease both;
+}
+.hero-title em{font-style:italic}
+
+#typewriter-wrap{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.3rem,2.6vw,2rem);
+  font-weight:700;font-style:italic;
+  margin-bottom:26px;min-height:2.4rem;
+  animation:fadeUp .7s .2s ease both;
+}
+#typewriter{color:var(--gd)}
+#cursor{
+  display:inline-block;width:2px;height:1em;
+  background:var(--pd);margin-left:2px;vertical-align:text-bottom;
+  animation:blink .75s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-subtitle {
+  font-size:1rem;color:var(--muted);line-height:1.78;max-width:440px;
+  margin-bottom:36px;animation:fadeUp .7s .3s ease both;
+}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s .4s ease both}
+
+.btn-primary {
+  padding:14px 32px;border-radius:50px;
+  background:linear-gradient(135deg,var(--gd),var(--green));
+  color:#fff;font-weight:600;font-size:.95rem;
+  border:none;cursor:pointer;text-decoration:none;display:inline-block;
+  transition:transform .25s,box-shadow .25s;
+  box-shadow:0 6px 24px rgba(90,163,155,.38);
+  font-family:'Outfit',sans-serif;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(90,163,155,.46)}
+.btn-secondary {
+  padding:14px 32px;border-radius:50px;background:#fff;color:var(--text);
+  font-weight:600;font-size:.95rem;
+  border:1.5px solid rgba(0,0,0,.1);cursor:pointer;text-decoration:none;display:inline-block;
+  transition:transform .25s,box-shadow .25s;box-shadow:0 2px 12px rgba(0,0,0,.06);
+  font-family:'Outfit',sans-serif;
+}
+.btn-secondary:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+
+.hero-visual{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;animation:fadeUp .8s .25s ease both}
+.phone-wrap{position:relative}
+.phone-mockup{
+  width:258px;height:516px;background:var(--dark);
+  border-radius:42px;border:7px solid #252836;
+  box-shadow:0 28px 70px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.phone-screen{
+  width:100%;height:100%;
+  background:linear-gradient(155deg,#1c2535 0%,#13192a 100%);
+  padding:18px 13px;display:flex;flex-direction:column;gap:9px;
+}
+.phone-topbar{display:flex;justify-content:space-between;align-items:center;padding:2px 0 8px}
+.phone-logo{color:var(--gl);font-family:'Fraunces',serif;font-weight:900;font-size:1.1rem}
+.phone-tag{background:var(--pink);color:#fff;font-size:.62rem;padding:3px 10px;border-radius:20px;font-weight:700}
+.food-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:11px;display:flex;gap:10px;align-items:center}
+.food-emoji{font-size:1.9rem}
+.food-info{flex:1}
+.food-name{color:#fff;font-size:.78rem;font-weight:600}
+.food-rest{color:rgba(255,255,255,.4);font-size:.66rem;margin:2px 0}
+.food-price-row{display:flex;gap:6px;align-items:center}
+.price-old{color:rgba(255,255,255,.28);font-size:.63rem;text-decoration:line-through}
+.price-new{color:var(--gl);font-size:.76rem;font-weight:700}
+.price-free{color:var(--pink);font-size:.76rem;font-weight:700}
+.phone-lbl{color:rgba(255,255,255,.3);font-size:.6rem;text-transform:uppercase;letter-spacing:1px;padding:3px 0 1px}
+.ngo-alert{background:rgba(243,162,190,.15);border:1px solid rgba(243,162,190,.28);border-radius:13px;padding:9px 11px;display:flex;gap:8px;align-items:center}
+.ngo-icon{font-size:1.35rem}
+.ngo-text{color:rgba(255,255,255,.8);font-size:.66rem;line-height:1.4}
+.ngo-text strong{color:var(--pl);font-size:.7rem;display:block}
+
+.fs{
+  position:absolute;background:#fff;border-radius:16px;padding:11px 18px;
+  box-shadow:0 8px 36px rgba(0,0,0,.11);font-size:.8rem;font-weight:600;
+  animation:floatCard 5s ease-in-out infinite;
+}
+.fs .num{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--gd);display:block}
+.fs1{top:50px;right:-36px;animation-delay:0s}
+.fs2{bottom:70px;left:-46px;background:var(--dark);color:#fff;animation-delay:-2.5s}
+.fs2 .num{color:var(--pink)}
+@keyframes floatCard{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+.section-eyebrow{font-size:.78rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--pd);margin-bottom:12px}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+.section-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.78;margin-bottom:56px}
+
+#story{padding:100px 5%;position:relative;overflow:hidden}
+#story::before{content:'';position:absolute;top:-120px;right:-120px;width:440px;height:440px;background:var(--green);border-radius:50%;filter:blur(110px);opacity:.11;pointer-events:none}
+
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:64px}
+.stat-card{background:#fff;border-radius:var(--r);padding:36px 28px;position:relative;overflow:hidden;box-shadow:0 2px 18px rgba(0,0,0,.05);transition:transform .35s,box-shadow .35s;cursor:default}
+.stat-card:hover{transform:translateY(-7px);box-shadow:0 18px 48px rgba(0,0,0,.1)}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.stat-card.gc::before{background:var(--green)}
+.stat-card.pc::before{background:var(--pink)}
+.stat-card.dc::before{background:linear-gradient(90deg,var(--green),var(--pink))}
+.stat-card.dc{background:var(--dark);color:#fff}
+.stat-icon{font-size:2.4rem;margin-bottom:16px;display:block}
+.stat-num{font-family:'Fraunces',serif;font-size:3.2rem;font-weight:900;line-height:1;margin-bottom:2px;display:inline}
+.stat-unit{font-family:'Fraunces',serif;font-size:2rem;font-weight:900}
+.stat-card.gc .stat-num,.stat-card.gc .stat-unit{color:var(--gd)}
+.stat-card.pc .stat-num,.stat-card.pc .stat-unit{color:var(--pd)}
+.stat-card.dc .stat-num,.stat-card.dc .stat-unit{color:var(--pl)}
+.stat-label{font-weight:700;font-size:.95rem;margin:8px 0 6px;display:block}
+.stat-desc{font-size:.84rem;line-height:1.55}
+.stat-card.gc .stat-desc,.stat-card.pc .stat-desc{color:var(--muted)}
+.stat-card.dc .stat-desc{color:rgba(255,255,255,.42)}
+
+.tl{display:flex;flex-direction:column;position:relative;max-width:680px;margin:0 auto}
+.tl::before{content:'';position:absolute;left:27px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--green),var(--pink))}
+.tl-item{display:flex;gap:26px;padding:26px 0;opacity:0;transform:translateX(-22px);transition:opacity .6s,transform .6s}
+.tl-item.visible{opacity:1;transform:none}
+.tl-dot{width:56px;height:56px;min-width:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.45rem;position:relative;z-index:1}
+.tl-dot.g{background:var(--gll)}
+.tl-dot.p{background:var(--pll)}
+.tl-body h3{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:6px}
+.tl-body p{color:var(--muted);font-size:.88rem;line-height:1.65}
+
+#how{padding:100px 5%;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+#how::before{content:'';position:absolute;top:-180px;right:-180px;width:500px;height:500px;background:var(--green);border-radius:50%;filter:blur(130px);opacity:.07;pointer-events:none}
+#how::after{content:'';position:absolute;bottom:-180px;left:-180px;width:500px;height:500px;background:var(--pink);border-radius:50%;filter:blur(130px);opacity:.07;pointer-events:none}
+#how .section-eyebrow{color:var(--gl)}
+#how .section-sub{color:rgba(255,255,255,.45)}
+.how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;position:relative;z-index:2}
+.how-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:34px;transition:background .3s,transform .3s,border .3s;cursor:default}
+.how-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);transform:translateY(-5px)}
+.how-card .sn{font-family:'Fraunces',serif;font-size:3rem;font-weight:900;opacity:.1;line-height:1;margin-bottom:-6px}
+.how-card.gc .sn{color:var(--green)}
+.how-card.pc .sn{color:var(--pink)}
+.how-card .si{font-size:2.1rem;margin-bottom:14px;display:block}
+.how-card h3{font-size:1.1rem;font-weight:700;margin-bottom:10px}
+.how-card p{color:rgba(255,255,255,.45);font-size:.86rem;line-height:1.72}
+.pills{display:flex;gap:14px;margin-top:46px;position:relative;z-index:2}
+.pill{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.pill-icon{font-size:1.9rem}
+.pill h4{font-weight:700;font-size:.98rem}
+.pill p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.5}
+.pill-tag{display:inline-block;padding:4px 12px;border-radius:50px;font-size:.7rem;font-weight:700;margin-top:4px;width:fit-content}
+.tg{background:rgba(129,191,183,.2);color:var(--gl)}
+.tp{background:rgba(243,162,190,.2);color:var(--pl)}
+.tb{background:rgba(100,160,255,.2);color:#a8c8ff}
+
+#recipe{padding:100px 5%}
+.recipe-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.ing-box{background:#fff;border-radius:var(--r);padding:28px;box-shadow:0 4px 28px rgba(0,0,0,.06);margin-top:26px}
+.ing-box label{font-weight:600;font-size:.88rem;display:block;margin-bottom:10px}
+.ing-row{display:flex;gap:10px;margin-bottom:14px}
+.ing-row input{flex:1;padding:12px 16px;border:1.5px solid #ebebeb;border-radius:12px;font-size:.88rem;font-family:'Outfit',sans-serif;outline:none;transition:border .2s}
+.ing-row input:focus{border-color:var(--green)}
+.ing-row button{padding:12px 20px;border-radius:12px;background:var(--gll);border:none;color:var(--gd);font-weight:700;cursor:pointer;font-size:1.2rem;transition:background .2s}
+.ing-row button:hover{background:var(--green);color:#fff}
+.tags-area{display:flex;flex-wrap:wrap;gap:8px;min-height:34px;margin-bottom:18px}
+.tag{display:flex;align-items:center;gap:6px;background:var(--pl);color:var(--pd);padding:6px 14px;border-radius:50px;font-size:.8rem;font-weight:600}
+.tag button{background:none;border:none;cursor:pointer;color:var(--pd);font-size:1rem;line-height:1;padding:0}
+.gen-btn{
+  width:100%;padding:15px;
+  background:linear-gradient(135deg,var(--gd),var(--pd));
+  color:#fff;border:none;border-radius:13px;
+  font-size:.98rem;font-weight:700;cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  transition:opacity .2s,transform .2s;
+  box-shadow:0 6px 22px rgba(0,0,0,.14);
+}
+.gen-btn:hover{opacity:.9;transform:translateY(-1px)}
+.gen-btn:disabled{opacity:.48;cursor:not-allowed;transform:none}
+.recipe-out{background:#fff;border-radius:var(--r);padding:30px;box-shadow:0 4px 28px rgba(0,0,0,.06);min-height:380px}
+.rp-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;text-align:center;color:var(--muted)}
+.rp-ph .bige{font-size:3.4rem;margin-bottom:14px}
+.rp-ph p{font-size:.88rem;line-height:1.6;max-width:200px}
+.recipe-result h3{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:6px;color:var(--dark)}
+.r-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.r-meta span{background:var(--gll);color:var(--gd);padding:4px 12px;border-radius:50px;font-size:.76rem;font-weight:600}
+.r-meta span.p{background:var(--pll);color:var(--pd)}
+.r-sec{font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:16px 0 9px}
+.r-ings{list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.r-ings li{background:var(--cream);border-radius:8px;padding:5px 12px;font-size:.8rem;font-weight:500}
+.r-steps{list-style:none;counter-reset:sc}
+.r-steps li{display:flex;gap:13px;margin-bottom:13px;align-items:flex-start}
+.r-steps li::before{counter-increment:sc;content:counter(sc);min-width:26px;height:26px;background:var(--green);color:#fff;border-radius:50%;font-size:.76rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.r-steps li span{font-size:.86rem;line-height:1.62}
+.r-tip{background:var(--gll);border-radius:12px;padding:13px 17px;margin-top:18px;font-size:.84rem;color:var(--gd)}
+.shimmer-box{display:flex;flex-direction:column;gap:12px;padding:8px 0}
+.shl{height:13px;border-radius:8px;background:linear-gradient(90deg,#f0f0f0 25%,#e6e6e6 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+.shl.s{width:38%}.shl.m{width:68%}.shl.l{width:100%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+footer{background:var(--dark);color:#fff;padding:60px 5% 34px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:46px}
+.f-logo{font-family:'Fraunces',serif;font-size:2.1rem;font-weight:900;background:linear-gradient(135deg,var(--gl),var(--pl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:13px}
+.footer-brand p{color:rgba(255,255,255,.4);font-size:.86rem;line-height:1.72;max-width:270px}
+.footer-col h4{font-weight:700;margin-bottom:14px;font-size:.88rem;color:rgba(255,255,255,.62)}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul a{color:rgba(255,255,255,.38);text-decoration:none;font-size:.84rem;transition:color .2s}
+.footer-col ul a:hover{color:var(--gl)}
+.footer-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:26px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,.28)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+.ta-block{display:none!important}
+.en-block{display:block}
+body.tamil .ta-block{display:block!important}
+body.tamil .en-block{display:none!important}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding-top:100px}
+  .hero-visual{display:none}
+  .stats-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .recipe-wrap{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:26px}
+  .pills{flex-direction:column}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">BITEZEE</div>
+  <ul class="nav-links">
+    <li><a href="#hero" data-en="Home" data-ta="முகப்பு">Home</a></li>
+    <li><a href="#story" data-en="Our Story" data-ta="கதை">Our Story</a></li>
+    <li><a href="/donate" data-en="How It Works" data-ta="எப்படி?">How It Works</a></li>
+    <li><a href="#recipe" data-en="Recipe AI" data-ta="செய்முறை AI">Recipe AI</a></li>
+    <li><a href="/impact">🌍 Impact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ta')">த</button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <div class="hero-text">
+    <div class="hero-badge">
+      <span>🇮🇳</span>
+      <span data-en="India's First Food Rescue Platform" data-ta="இந்தியாவின் முதல் உணவு மீட்பு தளம்">India's First Food Rescue Platform</span>
+    </div>
+
+    <h1 class="hero-title en-block">
+      Don't <em class="shine-pink">waste</em> it.<br><span class="shine">Share the taste.</span>
+    </h1>
+    <h1 class="hero-title ta-block" style="font-family:'Noto Sans Tamil',serif;font-size:clamp(2.2rem,4vw,3.8rem)">
+      வீணாக்காதீர்.<br><span class="shine">சுவையைப் பகிருங்கள்.</span>
+    </h1>
+
+    <div id="typewriter-wrap">
+      <span id="typewriter"></span><span id="cursor"></span>
+    </div>
+
+    <p class="hero-subtitle"
+       data-en="BITEZEE connects restaurants, homes, and donors with people who need food — and NGOs who can get it there. Leftover Dosa today? Someone's meal tomorrow."
+       data-ta="BITEZEE உணவகங்களையும் வீடுகளையும் — தேவையுள்ளவர்களுடன் இணைக்கிறது. இன்று மீதமான தோசை? நாளை யாரோ ஒருவரின் உணவு.">
+      BITEZEE connects restaurants, homes, and donors with people who need food — and NGOs who can get it there. Leftover Dosa today? Someone's meal tomorrow.
+    </p>
+
+    <div class="hero-ctas">
+      <!-- ✅ LINKED: Get Started → login page, then auto-redirect to order.html -->
+      <a href="/login" class="btn-primary" data-en="Get Started →" data-ta="தொடங்குங்கள் →">Get Started →</a>
+      <a href="#recipe" class="btn-secondary" data-en="Try Recipe AI ✨" data-ta="செய்முறை AI முயற்சி ✨">Try Recipe AI ✨</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="phone-wrap">
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="phone-topbar">
+            <span class="phone-logo">BITEZEE</span>
+            <span class="phone-tag">LIVE</span>
+          </div>
+          <div class="phone-lbl">Available Near You</div>
+          <div class="food-card"><div class="food-emoji">🫓</div><div class="food-info"><div class="food-name">Plain Dosa (×6)</div><div class="food-rest">Sri Murugan Mess</div><div class="food-price-row"><span class="price-old">₹60</span><span class="price-new">₹25</span></div></div></div>
+          <div class="food-card"><div class="food-emoji">🍛</div><div class="food-info"><div class="food-name">Veg Meals (×10)</div><div class="food-rest">Annapoorna Hotel</div><div class="food-price-row"><span class="price-free">FREE DONATE</span></div></div></div>
+          <div class="food-card"><div class="food-emoji">🥐</div><div class="food-info"><div class="food-name">Puffs & Sandwiches (×8)</div><div class="food-rest">Arya Bhavan Bakery</div><div class="food-price-row"><span class="price-old">₹120</span><span class="price-new">₹50</span></div></div></div>
+          <div class="phone-lbl" style="margin-top:4px">🔔 NGO Alert</div>
+          <div class="ngo-alert"><div class="ngo-icon">🏠</div><div class="ngo-text"><strong>35 meals available!</strong>Nanmai Illam – 2.1 km</div></div>
+        </div>
+      </div>
+      <div class="fs fs1"><span class="num">40%</span>Food wasted daily</div>
+      <div class="fs fs2"><span class="num">800M</span>Go hungry globally</div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="section-eyebrow" data-en="THE PROBLEM" data-ta="சிக்கல்">THE PROBLEM</div>
+  <h2 class="section-title en-block">Every day, <span class="shine">tons of food</span><br>disappears into the bin.</h2>
+  <h2 class="section-title ta-block" style="font-family:'Noto Sans Tamil',serif;font-size:clamp(1.6rem,3.5vw,2.4rem)">தினமும் <span class="shine">டன்கணக்கான உணவு</span><br>குப்பையில் போகிறது.</h2>
+  <p class="section-sub"
+     data-en="India wastes 68.7 million tonnes of food every year — while 200 million people go to bed hungry. This isn't just a statistic. It's your neighbor's unfinished biryani. It's the Dosa that didn't sell."
+     data-ta="இந்தியா ஆண்டுக்கு 68.7 மில்லியன் டன் உணவை வீணாக்குகிறது — 20 கோடி பேர் பட்டினியாக தூங்கும் நாட்டில். இது வெறும் புள்ளிவிவரம் அல்ல.">
+    India wastes 68.7 million tonnes of food every year — while 200 million people go to bed hungry. This isn't just a statistic.
+  </p>
+
+  <div class="stats-grid">
+    <div class="stat-card gc reveal">
+      <span class="stat-icon">🗑️</span>
+      <div><span class="stat-num counter" data-target="68">0</span><span class="stat-unit">M+</span></div>
+      <span class="stat-label" data-en="Tonnes of Food Wasted Yearly" data-ta="டன் உணவு வீணாக்கப்படுகிறது">Tonnes of Food Wasted Yearly</span>
+      <div class="stat-desc" data-en="India discards enough food annually to feed every hungry person in the country." data-ta="இந்தியா ஆண்டுதோறும் நாட்டின் ஒவ்வொரு பசித்தவரையும் உணவூட்டக்கூடிய அளவு வீணாக்குகிறது.">India discards enough food annually to feed every hungry person in the country.</div>
+    </div>
+    <div class="stat-card pc reveal">
+      <span class="stat-icon">😔</span>
+      <div><span class="stat-num counter" data-target="200">0</span><span class="stat-unit">M</span></div>
+      <span class="stat-label" data-en="People Go Hungry in India" data-ta="பேர் பட்டினியால் தவிக்கிறார்கள்">People Go Hungry in India</span>
+      <div class="stat-desc" data-en="Millions sleep without a meal simultaneously. The mismatch is heartbreaking — and solvable." data-ta="கோடிக்கணக்கானோர் சாப்பிடாமல் தூங்குகிறார்கள். இது தீர்க்கக்கூடியது.">Millions sleep without a meal simultaneously. The mismatch is heartbreaking — and solvable.</div>
+    </div>
+    <div class="stat-card dc reveal">
+      <span class="stat-icon">🍽️</span>
+      <div><span class="stat-num counter" data-target="40">0</span><span class="stat-unit">%</span></div>
+      <span class="stat-label" data-en="Restaurant Food Wasted" data-ta="உணவகங்களில் வீணாகும் உணவு">Restaurant Food Wasted</span>
+      <div class="stat-desc" data-en="Nearly half of food prepared in Indian restaurants never reaches a single plate." data-ta="இந்திய உணவகங்களில் தயாரிக்கப்படும் கிட்டத்தட்ட பாதி உணவு தட்டை சென்றடைவதில்லை.">Nearly half of food prepared in Indian restaurants never reaches a single plate.</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:46px">
+    <h3 class="section-title en-block" style="font-size:1.6rem">How food gets lost — and how <span class="shine">BITEZEE fixes it</span></h3>
+    <h3 class="section-title ta-block" style="font-family:'Noto Sans Tamil',serif;font-size:1.3rem">உணவு எப்படி வீணாகிறது — <span class="shine">BITEZEE எப்படி தீர்க்கிறது</span></h3>
+  </div>
+
+  <div class="tl">
+    <div class="tl-item"><div class="tl-dot g">🌅</div><div class="tl-body"><h3 data-en="Morning — Breakfast Prep" data-ta="காலை — காலை உணவு தயாரிப்பு">Morning — Breakfast Prep</h3><p data-en="A restaurant prepares 50 Dosas. Only 30 are sold. The remaining 20 sit and go cold." data-ta="ஒரு உணவகம் 50 தோசை தயாரிக்கிறது. 30 மட்டுமே விற்கிறது. மீதி 20 குளிர்ந்து போகிறது.">A restaurant prepares 50 Dosas. Only 30 are sold. The remaining 20 sit and go cold.</p></div></div>
+    <div class="tl-item"><div class="tl-dot p">📱</div><div class="tl-body"><h3 data-en="They Post on BITEZEE" data-ta="BITEZEE-ல் பதிவிடுகிறார்கள்">They Post on BITEZEE</h3><p data-en="Instead of binning them, the restaurant lists 20 Dosas — half price ₹5, or free for NGOs." data-ta="தூக்கி எறிவதற்கு பதில், ₹5-க்கு அல்லது NGO-களுக்கு இலவசமாக பதிவிடுகிறார்கள்.">Instead of binning them, the restaurant lists 20 Dosas — half price ₹5, or free for NGOs.</p></div></div>
+    <div class="tl-item"><div class="tl-dot g">🔔</div><div class="tl-body"><h3 data-en="NGOs Get Instant Alerts" data-ta="NGO-களுக்கு உடனடி அறிவிப்பு">NGOs Get Instant Alerts</h3><p data-en="Nearby orphanages and shelters are instantly notified. No more calling around." data-ta="அருகில் உள்ள அனாதை இல்லங்கள் உடனடியாக அறிவிக்கப்படுகின்றன.">Nearby orphanages and shelters are instantly notified. No more calling around.</p></div></div>
+    <div class="tl-item"><div class="tl-dot p">❤️</div><div class="tl-body"><h3 data-en="Food Reaches Who Needs It" data-ta="தேவையானவர்களுக்கு உணவு கிடைக்கிறது">Food Reaches Who Needs It</h3><p data-en="Children enjoy hot Dosas. The restaurant saves money, earns goodwill. Zero waste." data-ta="குழந்தைகளுக்கு சூடான தோசை கிடைக்கிறது. உணவகம் பணம் மிச்சப்படுத்துகிறது. வீண் இல்லை.">Children enjoy hot Dosas. The restaurant saves money, earns goodwill. Zero waste.</p></div></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="section-eyebrow" data-en="HOW IT WORKS" data-ta="எப்படி செயல்படுகிறது">HOW IT WORKS</div>
+  <h2 class="section-title en-block">Simple for everyone.<br><span class="shine">Powerful for India.</span></h2>
+  <h2 class="section-title ta-block" style="font-family:'Noto Sans Tamil',serif;font-size:clamp(1.6rem,3.5vw,2.4rem)">எல்லோருக்கும் எளிது.<br><span class="shine">இந்தியாவுக்கு சக்திவாய்ந்தது.</span></h2>
+  <p class="section-sub" data-en="BITEZEE works like Zomato — but instead of menus, you see real-time leftover food listings. Restaurants post, users buy or donate, NGOs collect in bulk." data-ta="BITEZEE ஜொமேட்டோ போல் செயல்படுகிறது — ஆனால் மெனுக்களுக்கு பதிலாக நிஜ நேர மிச்ச உணவு பட்டியல்களை காண்கீர்கள்.">BITEZEE works like Zomato — but instead of menus, you see real-time leftover food listings.</p>
+
+  <div class="how-grid">
+    <div class="how-card gc reveal"><div class="sn">01</div><span class="si">🏪</span><h3 data-en="Restaurants & Homes Post Food" data-ta="உணவகங்கள் & வீடுகள் பதிவிடும்">Restaurants & Homes Post Food</h3><p data-en="Add leftover food with quantity, expiry time, and price. Takes under 60 seconds." data-ta="மிச்ச உணவை அளவு, நேரம், விலையுடன் பதிவிடுங்கள். 60 வினாடிகளுக்கும் குறைவு.">Add leftover food with quantity, expiry time, and price. Takes under 60 seconds.</p></div>
+    <div class="how-card pc reveal"><div class="sn">02</div><span class="si">📍</span><h3 data-en="Buyers See Nearby Listings" data-ta="வாங்குபவர்கள் அருகில் உள்ளதை பார்க்கும்">Buyers See Nearby Listings</h3><p data-en="Open BITEZEE and see discounted food near you — like Zomato, but for rescue meals." data-ta="BITEZEE திறந்து தள்ளுபடி உணவை அருகில் காண்கீர்கள்.">Open BITEZEE and see discounted food near you — like Zomato, but for rescue meals.</p></div>
+    <div class="how-card gc reveal"><div class="sn">03</div><span class="si">🔔</span><h3 data-en="NGOs Get Bulk Meal Alerts" data-ta="NGO-களுக்கு மொத்த உணவு அறிவிப்பு">NGOs Get Bulk Meal Alerts</h3><p data-en="When 30+ meals are posted free, nearby orphanages receive an instant push notification." data-ta="30+ உணவுகள் இலவசமாக பதிவிடும்போது அனாதை இல்லங்களுக்கு உடனடி அறிவிப்பு வரும்.">When 30+ meals are posted free, nearby orphanages receive an instant push notification.</p></div>
+    <div class="how-card pc reveal"><div class="sn">04</div><span class="si">🤝</span><h3 data-en="Zero Waste. Zero Hunger." data-ta="வீண் இல்லை. பட்டினி இல்லை.">Zero Waste. Zero Hunger.</h3><p data-en="Food reaches people in need. Donors get impact reports. Restaurants build reputation." data-ta="உணவு தேவையானவர்களை சென்றடைகிறது. தானியாளர்கள் தாக்க அறிக்கை பெறுகிறார்கள்.">Food reaches people in need. Donors get impact reports. Restaurants build reputation.</p></div>
+  </div>
+
+  <div class="pills reveal">
+    <div class="pill"><div class="pill-icon">🍳</div><h4 data-en="Restaurants & Dhabas" data-ta="உணவகங்கள்">Restaurants & Dhabas</h4><p data-en="List leftovers in seconds. Sell at discount or donate. Build goodwill." data-ta="உணவை பதிவிட்டு விற்கவும் அல்லது தானம் செய்யவும்.">List leftovers in seconds. Sell at discount or donate. Build goodwill.</p><span class="pill-tag tg">DONOR</span></div>
+    <div class="pill"><div class="pill-icon">🙋</div><h4 data-en="Regular Users" data-ta="பொது பயனர்கள்">Regular Users</h4><p data-en="Buy good food at half price. Save money while saving the planet." data-ta="கோடி விலையில் நல்ல உணவை வாங்குங்கள்.">Buy good food at half price. Save money while saving the planet.</p><span class="pill-tag tp">BUYER</span></div>
+    <div class="pill"><div class="pill-icon">🏠</div><h4 data-en="NGOs & Orphanages" data-ta="NGO & அனாதை இல்லங்கள்">NGOs & Orphanages</h4><p data-en="Register once, get real-time bulk food alerts nearby." data-ta="பதிவு செய்யுங்கள், மொத்த உணவு தானத்திற்கு அறிவிப்பு பெறுங்கள்.">Register once, get real-time bulk food alerts nearby.</p><span class="pill-tag tb">NGO</span></div>
+  </div>
+</section>
+
+<section id="recipe">
+  <div class="section-eyebrow" data-en="AI RECIPE GENERATOR" data-ta="AI செய்முறை உருவாக்கி">AI RECIPE GENERATOR</div>
+  <h2 class="section-title en-block">Use what you have.<br><span class="shine-pink">Cook something amazing.</span></h2>
+  <h2 class="section-title ta-block" style="font-family:'Noto Sans Tamil',serif;font-size:clamp(1.6rem,3.5vw,2.4rem)">இருப்பதை உபயோகி.<br><span class="shine-pink">சிறப்பாக சமை.</span></h2>
+  <p class="section-sub"
+     data-en="Got a lonely carrot, leftover milk, and some rice? Don't throw them — let BITEZEE's AI suggest a recipe using exactly what's in your fridge."
+     data-ta="ஒரு கேரட், மிச்சமான பால், சில அரிசி இருக்கிறதா? தூக்கி எறியாதீர் — AI உங்கள் ஃபிரிட்ஜில் இருப்பதைக் கொண்டு செய்முறை சொல்லும்.">
+    Got a lonely carrot, leftover milk, and some rice? Don't throw them — let BITEZEE's AI suggest a recipe.
+  </p>
+
+  <div class="recipe-wrap">
+    <div class="reveal">
+      <div class="ing-box">
+        <label data-en="🥕 Add your ingredients" data-ta="🥕 உங்கள் பொருட்களை சேர்க்கவும்">🥕 Add your ingredients</label>
+        <div class="ing-row">
+          <input type="text" id="ingInput" placeholder="e.g. carrot, milk, eggs..."/>
+          <button onclick="addIng()">+</button>
+        </div>
+        <div class="tags-area" id="tagsArea"></div>
+        <button class="gen-btn" id="genBtn" onclick="generateRecipe()">
+          <span id="genBtnTxt">✨ Generate Recipe with AI</span>
+        </button>
+      </div>
+      <div style="margin-top:18px">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px" data-en="Quick add:" data-ta="விரைவாக சேர்:">Quick add:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <button onclick="quickAdd('Rice')" class="lang-btn" data-en="🍚 Rice" data-ta="🍚 அரிசி">🍚 Rice</button>
+          <button onclick="quickAdd('Onion')" class="lang-btn" data-en="🧅 Onion" data-ta="🧅 வெங்காயம்">🧅 Onion</button>
+          <button onclick="quickAdd('Tomato')" class="lang-btn" data-en="🍅 Tomato" data-ta="🍅 தக்காளி">🍅 Tomato</button>
+          <button onclick="quickAdd('Milk')" class="lang-btn" data-en="🥛 Milk" data-ta="🥛 பால்">🥛 Milk</button>
+          <button onclick="quickAdd('Egg')" class="lang-btn" data-en="🥚 Egg" data-ta="🥚 முட்டை">🥚 Egg</button>
+          <button onclick="quickAdd('Carrot')" class="lang-btn" data-en="🥕 Carrot" data-ta="🥕 கேரட்">🥕 Carrot</button>
+          <button onclick="quickAdd('Potato')" class="lang-btn" data-en="🥔 Potato" data-ta="🥔 உருளை">🥔 Potato</button>
+          <button onclick="quickAdd('Bread')" class="lang-btn" data-en="🍞 Bread" data-ta="🍞 ரொட்டி">🍞 Bread</button>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="recipe-out" id="recipeOut">
+        <div class="rp-ph">
+          <div class="bige">🍳</div>
+          <p data-en="Add ingredients &amp; tap Generate — AI will suggest a delicious meal!" data-ta="பொருட்களை சேர்த்து Generate அழுத்துங்கள் — AI சுவையான உணவை பரிந்துரைக்கும்!">Add ingredients &amp; tap Generate — AI will suggest a delicious meal!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="f-logo">BITEZEE</div>
+      <p data-en="Connecting surplus food with people who need it — one bite at a time. Built with love for India." data-ta="மிச்ச உணவை தேவையானவர்களுடன் இணைக்கிறோம். இந்தியாவிற்காக அன்புடன்.">Connecting surplus food with people who need it — one bite at a time. Built with love for India.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Platform" data-ta="தளம்">Platform</h4>
+      <ul>
+        <li><a href="#hero" data-en="Home" data-ta="முகப்பு">Home</a></li>
+        <li><a href="#story" data-en="Our Story" data-ta="கதை">Our Story</a></li>
+        <li><a href="/donate" data-en="How It Works" data-ta="எப்படி?">How It Works</a></li>
+        <li><a href="#recipe" data-en="Recipe AI" data-ta="செய்முறை AI">Recipe AI</a></li>
+    <li><a href="/impact">🌍 Impact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Join As" data-ta="சேருங்கள்">Join As</h4>
+      <ul>
+        <li><a href="/order" data-en="Restaurant Partner" data-ta="உணவக கூட்டாளி">Restaurant Partner</a></li>
+        <li><a href="/order" data-en="NGO / Shelter" data-ta="NGO / அனாதை இல்லம்">NGO / Shelter</a></li>
+        <li><a href="/order" data-en="Food Donor" data-ta="உணவு தானியாளர்">Food Donor</a></li>
+        <li><a href="/order" data-en="Volunteer" data-ta="தன்னார்வலர்">Volunteer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2025 BITEZEE. Made with ❤️ to fight food waste in India.</span>
+    <span>Designed for <span style="color:var(--pl)">Tamil Nadu</span> & beyond 🌿</span>
+  </div>
+</footer>
+
+<script>
+let lang = 'en';
+const twEN = ['Leftover Dosa? List it.','Surplus Biryani? Share it.','Extra Idli? Donate it.','One post. Zero waste.','Feed someone today. 🌿'];
+const twTA = ['மீதமான தோசையா? பட்டியலிடுங்கள்.','மிச்சமான பிரியாணியா? பகிருங்கள்.','கூடுதல் இட்லியா? தானம் செய்யுங்கள்.','ஒரு பதிவு. வீண் இல்லை.'];
+let twPhrases = twEN, twIdx=0, twChar=0, twDel=false;
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', (b.textContent.trim()==='EN'&&l==='en')||(b.textContent.trim()==='த'&&l==='ta'));
+  });
+  document.body.classList.toggle('tamil', l==='ta');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const t = el.getAttribute('data-'+l);
+    if(t) el.textContent = t;
+  });
+  twPhrases = l==='ta' ? twTA : twEN;
+  twIdx=0; twChar=0; twDel=false;
+  document.getElementById('typewriter').textContent='';
+  document.getElementById('genBtnTxt').textContent = l==='en'?'✨ Generate Recipe with AI':'✨ AI கொண்டு செய்முறை உருவாக்கு';
+  document.getElementById('ingInput').placeholder = l==='en'?'e.g. carrot, milk, eggs...':'எ.கா. கேரட், பால், முட்டை...';
+}
+
+function runTW() {
+  const el = document.getElementById('typewriter');
+  const phrase = twPhrases[twIdx % twPhrases.length];
+  if (!twDel) {
+    el.textContent = phrase.substring(0, ++twChar);
+    if (twChar === phrase.length) { twDel=true; setTimeout(runTW,1900); return; }
+  } else {
+    el.textContent = phrase.substring(0, --twChar);
+    if (twChar === 0) { twDel=false; twIdx++; setTimeout(runTW,420); return; }
+  }
+  setTimeout(runTW, twDel ? 42 : 72);
+}
+setTimeout(runTW, 1000);
+
+function animCounter(el) {
+  if (el.dataset.done) return;
+  el.dataset.done = '1';
+  const target = +el.dataset.target;
+  const dur = 1800, step = target/(dur/16);
+  let cur = 0;
+  const t = setInterval(() => {
+    cur = Math.min(cur+step, target);
+    el.textContent = Math.floor(cur);
+    if (cur>=target) clearInterval(t);
+  }, 16);
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    e.target.querySelectorAll('.counter').forEach(animCounter);
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .tl-item').forEach(el => obs.observe(el));
+document.querySelectorAll('.stat-card').forEach(el => {
+  const co = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.querySelectorAll('.counter').forEach(animCounter); co.unobserve(e.target); } });
+  }, {threshold:.3});
+  co.observe(el);
+});
+
+let ingredients = [];
+function addIng(){
+  const inp=document.getElementById('ingInput');
+  const v=inp.value.trim();
+  if(!v||ingredients.includes(v)){inp.value='';return;}
+  ingredients.push(v); renderTags(); inp.value=''; inp.focus();
+}
+function quickAdd(item){ if(!ingredients.includes(item)){ingredients.push(item);renderTags();} }
+document.getElementById('ingInput').addEventListener('keydown',e=>{if(e.key==='Enter')addIng();});
+function removeIng(i){ingredients.splice(i,1);renderTags();}
+function renderTags(){
+  document.getElementById('tagsArea').innerHTML=ingredients.map((ing,i)=>
+    `<div class="tag">${ing}<button onclick="removeIng(${i})">×</button></div>`).join('');
+}
+
+async function generateRecipe(){
+  if(!ingredients.length){
+    alert(lang==='en'?'Add at least one ingredient first!':'முதலில் ஒரு பொருளை சேர்க்கவும்!');
+    return;
+  }
+  const btn=document.getElementById('genBtn');
+  const txt=document.getElementById('genBtnTxt');
+  const out=document.getElementById('recipeOut');
+  btn.disabled=true;
+  txt.textContent=lang==='en'?'⏳ Generating...':'⏳ உருவாக்குகிறோம்...';
+  out.innerHTML=`<div class="shimmer-box"><div class="shl s"></div><div class="shl m"></div><div class="shl l"></div><div class="shl m"></div><div class="shl l"></div><div class="shl s"></div><div class="shl l"></div><div class="shl m"></div></div>`;
+
+  const prompt = lang==='ta'
+    ? `நீங்கள் BITEZEE-ன் AI சமையல் உதவியாளர். பயனரிடம் இந்த பொருட்கள் உள்ளன: ${ingredients.join(', ')}. இந்த பொருட்களை மட்டும் பயன்படுத்தி ஒரு இந்திய செய்முறை உருவாக்கவும். ONLY JSON திரும்பவும், backticks வேண்டாம்: {"name":"","servings":"","time":"","difficulty":"","ingredients_used":[],"steps":[],"tip":""}`
+    : `You are BITEZEE's AI recipe assistant. User has: ${ingredients.join(', ')}. Create a simple Indian recipe using ONLY these. Respond ONLY with JSON, no markdown: {"name":"","servings":"","time":"","difficulty":"","ingredients_used":[],"steps":[],"tip":""}`;
+
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+    });
+    const data=await res.json();
+    const raw=data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim();
+    const r=JSON.parse(raw);
+    const iL=lang==='en'?'Ingredients Used':'பயன்படுத்திய பொருட்கள்';
+    const sL=lang==='en'?'Steps':'படிகள்';
+    const tL=lang==='en'?'💡 Tip':'💡 குறிப்பு';
+    out.innerHTML=`<div class="recipe-result">
+      <h3>${r.name}</h3>
+      <div class="r-meta"><span>⏱ ${r.time}</span><span>${r.servings}</span><span class="p">⭐ ${r.difficulty}</span></div>
+      <div class="r-sec">${iL}</div>
+      <ul class="r-ings">${r.ingredients_used.map(i=>`<li>🌿 ${i}</li>`).join('')}</ul>
+      <div class="r-sec">${sL}</div>
+      <ol class="r-steps">${r.steps.map(s=>`<li><span>${s}</span></li>`).join('')}</ol>
+      ${r.tip?`<div class="r-tip"><strong>${tL}:</strong> ${r.tip}</div>`:''}
+    </div>`;
+  } catch(err){
+    out.innerHTML=`<div class="rp-ph"><div class="bige">😔</div><p>${lang==='en'?'Could not generate. Try again!':'மீண்டும் முயற்சிக்கவும்!'}</p></div>`;
+  }
+  btn.disabled=false;
+  txt.textContent=lang==='en'?'✨ Generate Another Recipe':'✨ மீண்டும் உருவாக்கு';
+}
+</script>
+</body>
+</html>

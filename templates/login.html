@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BITEZEE – Login / Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#81BFB7;--gd:#5aa39b;--gl:#b8ddd9;--gll:#e0f2ef;
+  --pink:#F3A2BE;--pd:#e07fa3;--pl:#fbd5e6;--pll:#fef0f6;
+  --cream:#FDF8F4;--dark:#141820;--text:#1e2028;--muted:#7a7a8a;--r:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%;overflow-x:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:110px 16px 60px;position:relative}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;animation:floatB 8s ease-in-out infinite}
+.b1{width:400px;height:400px;background:var(--green);opacity:.18;top:-80px;right:-60px;animation-delay:0s}
+.b2{width:320px;height:320px;background:var(--pink);opacity:.14;bottom:-60px;left:-60px;animation-delay:-3.5s}
+.b3{width:180px;height:180px;background:var(--green);opacity:.1;top:55%;left:48%;animation-delay:-6s}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+.shine{background:linear-gradient(120deg,var(--gd) 0%,var(--green) 30%,var(--pink) 55%,var(--pd) 75%,var(--gd) 100%);background-size:250% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 4s linear infinite}
+@keyframes shine{to{background-position:250% center}}
+nav{position:fixed;top:0;width:100%;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 5%;background:rgba(253,248,244,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(129,191,183,.18)}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(135deg,var(--gd),var(--pd));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.87rem;transition:color .2s}
+.nav-links a:hover{color:var(--gd)}
+@media(max-width:700px){.nav-links{display:none}}
+/* card */
+.card{position:relative;z-index:2;background:#fff;border-radius:28px;width:100%;max-width:460px;box-shadow:0 20px 64px rgba(0,0,0,.1),0 0 0 1px rgba(129,191,183,.12);overflow:hidden;animation:cardIn .55s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}
+.card-head{background:var(--dark);padding:28px 32px 22px;position:relative;overflow:hidden}
+.card-head::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;background:var(--green);border-radius:50%;filter:blur(80px);opacity:.13;pointer-events:none}
+.card-head::after{content:'';position:absolute;bottom:-50px;left:-50px;width:180px;height:180px;background:var(--pink);border-radius:50%;filter:blur(70px);opacity:.1;pointer-events:none}
+.card-logo{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--gl),var(--pl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1;margin-bottom:4px}
+.card-tag{color:rgba(255,255,255,.3);font-size:.8rem;position:relative;z-index:1;margin-bottom:20px}
+.tabs{display:flex;background:rgba(255,255,255,.07);border-radius:50px;padding:4px;gap:4px;position:relative;z-index:1}
+.tab{flex:1;padding:9px;border-radius:50px;font-size:.84rem;font-weight:600;cursor:pointer;color:rgba(255,255,255,.35);transition:all .22s;border:none;background:none;font-family:'Outfit',sans-serif}
+.tab.active{background:linear-gradient(135deg,var(--gd),var(--green));color:#fff;box-shadow:0 4px 14px rgba(90,163,155,.32)}
+.card-body{padding:28px 32px 32px}
+.err{background:var(--pll);border:1px solid rgba(224,127,163,.3);color:var(--pd);border-radius:12px;padding:10px 15px;font-size:.82rem;margin-bottom:16px;display:none}
+/* google btn */
+.google-btn{width:100%;padding:13px;border-radius:50px;border:1.5px solid #ebebeb;background:#fff;color:var(--text);font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .22s;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:16px}
+.google-btn:hover{border-color:var(--green);background:var(--gll);box-shadow:0 4px 18px rgba(90,163,155,.18)}
+.g-svg{width:20px;height:20px;flex-shrink:0}
+/* divider */
+.divider{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--muted);font-size:.78rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#ebebeb}
+/* method toggle */
+.method-row{display:flex;gap:8px;margin-bottom:14px}
+.method-btn{flex:1;padding:9px;border-radius:50px;border:1.5px solid #ebebeb;background:transparent;color:var(--muted);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.method-btn.active{background:var(--gll);border-color:var(--gd);color:var(--gd)}
+/* form */
+.fg{margin-bottom:15px;position:relative}
+.fg label{display:block;font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+.fg input,.fg select{width:100%;padding:12px 16px;border:1.5px solid #ebebeb;border-radius:12px;font-size:.9rem;font-family:'Outfit',sans-serif;outline:none;background:#fff;color:var(--text);transition:border .2s,box-shadow .2s}
+.fg input:focus,.fg select:focus{border-color:var(--gd);box-shadow:0 0 0 3px rgba(90,163,155,.1)}
+.fg input::placeholder{color:#c8c8d4}
+.eye-btn{position:absolute;right:13px;top:36px;background:none;border:none;cursor:pointer;font-size:.95rem;opacity:.38;transition:opacity .2s;line-height:1;padding:0}
+.eye-btn:hover{opacity:.75}
+/* role */
+.role-row{display:flex;gap:8px;margin-bottom:16px}
+.role-btn{flex:1;padding:12px 6px;border-radius:12px;border:1.5px solid #ebebeb;background:var(--cream);color:var(--muted);font-size:.76rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;font-family:'Outfit',sans-serif;line-height:1.4}
+.role-btn:hover{border-color:var(--green);color:var(--gd)}
+.role-btn.active{border-color:var(--gd);background:var(--gll);color:var(--gd)}
+.ri{font-size:1.4rem;display:block;margin-bottom:4px}
+/* step dots */
+.sdots{display:flex;gap:7px;justify-content:center;margin-bottom:20px}
+.sd{width:8px;height:8px;border-radius:50%;background:#ebebeb;transition:all .3s}
+.sd.active{background:var(--gd);transform:scale(1.35)}
+.sd.done{background:var(--gd)}
+/* OTP — fully fixed */
+.otp-box{background:var(--gll);border-radius:14px;padding:16px 14px 14px;margin-bottom:16px}
+.otp-lbl{font-size:.76rem;font-weight:700;color:var(--gd);margin-bottom:12px}
+.otp-row{display:flex;flex-direction:row;gap:8px;justify-content:center;align-items:center}
+.oi{display:block;width:44px;height:52px;text-align:center;font-size:1.3rem;font-weight:700;border:1.5px solid rgba(90,163,155,.3);border-radius:10px;background:#fff;outline:none;font-family:'Outfit',sans-serif;color:var(--text);transition:border .2s,box-shadow .2s;padding:0;flex:0 0 44px}
+.oi:focus{border-color:var(--gd);box-shadow:0 0 0 3px rgba(90,163,155,.12)}
+.otp-hint{font-size:.71rem;color:var(--gd);margin-top:10px;text-align:center}
+/* buttons */
+.btn-p{width:100%;padding:13px 28px;border-radius:50px;background:linear-gradient(135deg,var(--gd),var(--green));color:#fff;font-weight:700;font-size:.94rem;border:none;cursor:pointer;font-family:'Outfit',sans-serif;box-shadow:0 6px 22px rgba(90,163,155,.35);transition:transform .22s,box-shadow .22s;margin-top:4px}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(90,163,155,.44)}
+.btn-p:disabled{opacity:.46;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-p.pk{background:linear-gradient(135deg,var(--pd),var(--pink));box-shadow:0 6px 22px rgba(224,127,163,.35)}
+.btn-p.pk:hover{box-shadow:0 10px 28px rgba(224,127,163,.44)}
+.btn-row{display:flex;gap:10px;margin-top:6px}
+.btn-back{padding:13px 20px;border-radius:50px;border:1.5px solid rgba(0,0,0,.1);background:#fff;color:var(--text);font-weight:600;font-size:.9rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;flex-shrink:0}
+.btn-back:hover{background:var(--gll);border-color:var(--gd);color:var(--gd)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+/* prefilled highlight */
+.prefilled{background:var(--gll)!important;border-color:rgba(90,163,155,.5)!important;color:var(--gd)!important}
+/* success */
+.success-view{display:none;text-align:center;padding:8px 0}
+.si{font-size:4rem;margin-bottom:14px;animation:bounceIn .5s ease both}
+@keyframes bounceIn{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+.s-badge{display:inline-flex;align-items:center;gap:7px;background:var(--pl);color:var(--pd);padding:7px 18px;border-radius:50px;font-size:.78rem;font-weight:700;margin-bottom:14px}
+.s-title{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;margin-bottom:8px}
+.s-sub{color:var(--muted);font-size:.88rem;line-height:1.7;max-width:300px;margin:0 auto 20px}
+.s-btn{display:inline-block;padding:13px 30px;border-radius:50px;background:linear-gradient(135deg,var(--gd),var(--green));color:#fff;font-weight:700;font-size:.9rem;text-decoration:none;box-shadow:0 6px 22px rgba(90,163,155,.35)}
+/* redirect bar */
+.redirect-bar{background:var(--gll);border-radius:10px;padding:10px 16px;font-size:.8rem;color:var(--gd);font-weight:600;margin-top:14px;display:flex;align-items:center;gap:8px}
+.redirect-bar .dot{width:8px;height:8px;border-radius:50%;background:var(--gd);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.bot-link{text-align:center;margin-top:16px;font-size:.79rem;color:var(--muted)}
+.bot-link a{color:var(--gd);text-decoration:none;font-weight:600;cursor:pointer}
+/* Google modal */
+.g-overlay{display:none;position:fixed;inset:0;background:rgba(20,24,32,.5);backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.g-overlay.show{display:flex}
+.g-modal{background:#fff;border-radius:24px;width:100%;max-width:380px;overflow:hidden;animation:cardIn .3s ease both;box-shadow:0 24px 60px rgba(0,0,0,.2)}
+.gm-head{padding:22px 24px 16px;border-bottom:1px solid #f0f0f0}
+.gm-title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;margin-bottom:2px}
+.gm-sub{font-size:.77rem;color:var(--muted)}
+.g-acc{display:flex;align-items:center;gap:13px;padding:14px 24px;cursor:pointer;transition:background .2s;border-bottom:1px solid #fafafa}
+.g-acc:hover{background:var(--gll)}
+.g-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:#fff;flex-shrink:0}
+.g-an{font-weight:700;font-size:.9rem}
+.g-ae{font-size:.73rem;color:var(--muted);margin-top:2px}
+.gm-foot{padding:14px 24px}
+.g-cancel{width:100%;padding:11px;border-radius:50px;border:1.5px solid #ebebeb;background:#fff;color:var(--muted);font-size:.84rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.g-cancel:hover{border-color:var(--pd);color:var(--pd)}
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<nav>
+  <a href="/" class="nav-logo">BITEZEE</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/order">Order Food</a></li>
+    <li><a href="/donate">Donate</a></li>
+    <li><a href="/impact">🌍 Impact</a></li>
+    <li><a href="/rewards">Rewards</a></li>
+  </ul>
+</nav>
+
+<!-- Google picker -->
+<div class="g-overlay" id="gOverlay">
+  <div class="g-modal">
+    <div class="gm-head">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
+        <svg class="g-svg" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        <div class="gm-title">Sign in with Google</div>
+      </div>
+      <div class="gm-sub">Choose an account to continue to BITEZEE</div>
+    </div>
+    <div class="g-acc" onclick="pickGoogle('Arjun Kumar','arjun.kumar@gmail.com','AK','#4285f4,#34a853')">
+      <div class="g-av" style="background:linear-gradient(135deg,#4285f4,#34a853)">AK</div>
+      <div><div class="g-an">Arjun Kumar</div><div class="g-ae"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e4f5c445b4000455b434f5c6e49434f4742004d4143">[email&#160;protected]</a></div></div>
+    </div>
+    <div class="g-acc" onclick="pickGoogle('Priya Sharma','priya.sharma@gmail.com','PS','#e07fa3,#F3A2BE')">
+      <div class="g-av" style="background:linear-gradient(135deg,#e07fa3,#F3A2BE)">PS</div>
+      <div><div class="g-an">Priya Sharma</div><div class="g-ae"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e6e6c77677f306d767f6c737f5e79737f7772307d7173">[email&#160;protected]</a></div></div>
+    </div>
+    <div class="g-acc" onclick="pickGoogle('Sri Murugan Mess','srimurugan@gmail.com','SM','#f39c12,#e67e22')">
+      <div class="g-av" style="background:linear-gradient(135deg,#f39c12,#e67e22)">SM</div>
+      <div><div class="g-an">Sri Murugan Mess</div><div class="g-ae"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f380819a9e86818694929db3949e929a9fdd909c9e">[email&#160;protected]</a></div></div>
+    </div>
+    <div class="gm-foot">
+      <button class="g-cancel" onclick="closeGoogle()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div class="card-logo">BITEZEE</div>
+    <div class="card-tag">Don't waste. Share the taste. 🌿</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('login')">Login</button>
+      <button class="tab" onclick="switchTab('register')">Register</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="err" id="errMsg"></div>
+
+    <!-- LOGIN -->
+    <div id="loginForm">
+      <button class="google-btn" onclick="openGoogle('login')">
+        <svg class="g-svg" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Continue with Google
+      </button>
+      <div class="divider">or sign in manually</div>
+      <div class="method-row">
+        <button class="method-btn active" onclick="setMethod('email','l')">📧 Email</button>
+        <button class="method-btn" onclick="setMethod('phone','l')">📱 Phone</button>
+      </div>
+      <div class="fg" id="lEG">
+        <label>Email Address</label>
+        <input type="email" id="lEmail" placeholder="you@email.com"/>
+      </div>
+      <div class="fg" id="lPG" style="display:none">
+        <label>Phone Number</label>
+        <input type="tel" id="lPhone" placeholder="+91 98765 43210"/>
+      </div>
+      <div class="fg">
+        <label>Password</label>
+        <input type="password" id="lPass" placeholder="Your password"/>
+        <button class="eye-btn" onclick="tp('lPass',this)" type="button">👁️</button>
+      </div>
+      <div style="text-align:right;margin-bottom:14px">
+        <a href="#" style="color:var(--gd);font-size:.77rem;text-decoration:none;font-weight:600">Forgot password?</a>
+      </div>
+      <button class="btn-p" onclick="doLogin()">Login to BITEZEE →</button>
+      <div class="bot-link">No account? <a onclick="switchTab('register')">Register free</a></div>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerForm" style="display:none">
+      <div class="sdots">
+        <div class="sd active" id="sd1"></div>
+        <div class="sd" id="sd2"></div>
+        <div class="sd" id="sd3"></div>
+      </div>
+
+      <!-- S1 -->
+      <div id="rS1">
+        <p style="color:var(--muted);font-size:.82rem;text-align:center;margin-bottom:14px">I want to join as…</p>
+        <div class="role-row">
+          <button class="role-btn" onclick="pickRole('donor',this)"><span class="ri">🍳</span>Restaurant<br>/Donor</button>
+          <button class="role-btn" onclick="pickRole('buyer',this)"><span class="ri">🙋</span>Food<br>Buyer</button>
+          <button class="role-btn" onclick="pickRole('ngo',this)"><span class="ri">🏠</span>NGO/<br>Shelter</button>
+        </div>
+        <button class="google-btn" onclick="openGoogle('register')">
+          <svg class="g-svg" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign up with Google
+        </button>
+        <div class="divider">or fill manually</div>
+        <button class="btn-p" id="rN1" onclick="goS(2)" disabled>Continue →</button>
+      </div>
+
+      <!-- S2 -->
+      <div id="rS2" style="display:none">
+        <div class="method-row">
+          <button class="method-btn active" onclick="setMethod('email','r')">📧 Email</button>
+          <button class="method-btn" onclick="setMethod('phone','r')">📱 Phone</button>
+        </div>
+        <div class="fg" id="rEG">
+          <label>Email Address</label>
+          <input type="email" id="rEmail" placeholder="you@email.com"/>
+        </div>
+        <div class="fg" id="rPG" style="display:none">
+          <label>Phone Number</label>
+          <input type="tel" id="rPhone" placeholder="+91 98765 43210"/>
+        </div>
+        <div class="fg">
+          <label>Full Name</label>
+          <input type="text" id="rName" placeholder="Your name"/>
+        </div>
+        <div class="fg" id="rOG" style="display:none">
+          <label>Org / Restaurant Name</label>
+          <input type="text" id="rOrg" placeholder="e.g. Sri Murugan Mess"/>
+        </div>
+        <div class="fg">
+          <label>City</label>
+          <select id="rCity">
+            <option value="">Select city…</option>
+            <option>Chennai</option><option>Coimbatore</option><option>Madurai</option>
+            <option>Nagercoil</option><option>Trichy</option><option>Salem</option><option>Other</option>
+          </select>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goS(1)">← Back</button>
+          <button class="btn-p" style="flex:1" onclick="goS(3)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div id="rS3" style="display:none">
+        <div class="fg">
+          <label>Create Password</label>
+          <input type="password" id="rPass" placeholder="Min 8 characters"/>
+          <button class="eye-btn" onclick="tp('rPass',this)" type="button">👁️</button>
+        </div>
+        <div class="fg">
+          <label>Confirm Password</label>
+          <input type="password" id="rConf" placeholder="Re-enter password"/>
+        </div>
+        <div class="otp-box">
+          <div class="otp-lbl">📲 OTP sent to your email / phone</div>
+          <div class="otp-row">
+            <input class="oi" type="text" maxlength="1" id="o1" oninput="on(this,'o2')" onkeydown="ob(event,this,'')">
+            <input class="oi" type="text" maxlength="1" id="o2" oninput="on(this,'o3')" onkeydown="ob(event,this,'o1')">
+            <input class="oi" type="text" maxlength="1" id="o3" oninput="on(this,'o4')" onkeydown="ob(event,this,'o2')">
+            <input class="oi" type="text" maxlength="1" id="o4" oninput="on(this,'o5')" onkeydown="ob(event,this,'o3')">
+            <input class="oi" type="text" maxlength="1" id="o5" oninput="on(this,'o6')" onkeydown="ob(event,this,'o4')">
+            <input class="oi" type="text" maxlength="1" id="o6" onkeydown="ob(event,this,'o5')">
+          </div>
+          <div class="otp-hint">Demo OTP: <strong>1 · 2 · 3 · 4 · 5 · 6</strong></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goS(2)">← Back</button>
+          <button class="btn-p pk" style="flex:1" onclick="doRegister()">Create Account 🎉</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-view" id="sv">
+      <div class="si" id="sIco">🎉</div>
+      <div class="s-badge"><span>🌿</span><span id="sBadge">Food Rescuer</span></div>
+      <h2 class="s-title"><span class="shine" id="sTitle">Welcome!</span></h2>
+      <p class="s-sub" id="sSub">Your account is ready!</p>
+      <a href="/order" class="s-btn">Browse Food Now →</a>
+      <div class="redirect-bar"><span class="dot"></span><span id="rdTxt">Redirecting in 2s…</span></div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+let lM='email',rM='email',sRole='',gMode='';
+
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',(i===0&&t==='login')||(i===1&&t==='register')));
+  document.getElementById('loginForm').style.display=t==='login'?'block':'none';
+  document.getElementById('registerForm').style.display=t==='register'?'block':'none';
+  hideErr();
+}
+
+function setMethod(m,c){
+  if(c==='l'){
+    lM=m;
+    document.getElementById('lEG').style.display=m==='email'?'block':'none';
+    document.getElementById('lPG').style.display=m==='phone'?'block':'none';
+    document.querySelectorAll('#loginForm .method-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&m==='email')||(i===1&&m==='phone')));
+  } else {
+    rM=m;
+    document.getElementById('rEG').style.display=m==='email'?'block':'none';
+    document.getElementById('rPG').style.display=m==='phone'?'block':'none';
+    document.querySelectorAll('#rS2 .method-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&m==='email')||(i===1&&m==='phone')));
+  }
+}
+
+function pickRole(r,el){
+  sRole=r;
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('rN1').disabled=false;
+  document.getElementById('rOG').style.display=(r==='donor'||r==='ngo')?'block':'none';
+}
+
+function goS(n){
+  if(n===3){
+    const nm=document.getElementById('rName').value.trim();
+    const ct=document.getElementById('rCity').value;
+    if(!nm||!ct){showErr('Please fill in all fields!');return;}
+  }
+  hideErr();
+  [1,2,3].forEach(i=>{
+    document.getElementById('rS'+i).style.display=i===n?'block':'none';
+    const d=document.getElementById('sd'+i);
+    d.className='sd'+(i<n?' done':i===n?' active':'');
+  });
+}
+
+function openGoogle(mode){gMode=mode;document.getElementById('gOverlay').classList.add('show');}
+function closeGoogle(){document.getElementById('gOverlay').classList.remove('show');}
+
+function pickGoogle(name,email){
+  closeGoogle();
+  if(gMode==='register'){
+    if(!sRole){sRole='buyer';document.querySelectorAll('.role-btn')[1].classList.add('active');document.getElementById('rN1').disabled=false;}
+    goS(2);
+    setTimeout(()=>{
+      const ne=document.getElementById('rEmail');
+      const nn=document.getElementById('rName');
+      ne.value=email; nn.value=name;
+      [ne,nn].forEach(el=>{el.classList.add('prefilled');setTimeout(()=>el.classList.remove('prefilled'),2500);});
+    },100);
+  } else {
+    showSuccess(name,'Google');
+  }
+}
+
+function doLogin(){
+  const v=lM==='email'?document.getElementById('lEmail').value.trim():document.getElementById('lPhone').value.trim();
+  const p=document.getElementById('lPass').value;
+  if(!v||!p){showErr('Please fill in all fields!');return;}
+  hideErr();
+  showSuccess(v.includes('@')?v.split('@')[0]:v,'manual');
+}
+
+function doRegister(){
+  const otp=['o1','o2','o3','o4','o5','o6'].map(id=>document.getElementById(id).value).join('');
+  const p=document.getElementById('rPass').value;
+  const c=document.getElementById('rConf').value;
+  if(p.length<8){showErr('Password must be at least 8 characters!');return;}
+  if(p!==c){showErr('Passwords do not match!');return;}
+  if(otp!=='123456'){showErr('Wrong OTP — use 1 2 3 4 5 6 for demo');return;}
+  hideErr();
+  showSuccess(document.getElementById('rName').value.trim()||'User','register');
+}
+
+function showSuccess(name,mode){
+  document.getElementById('loginForm').style.display='none';
+  document.getElementById('registerForm').style.display='none';
+  const sv=document.getElementById('sv');sv.style.display='block';
+  document.getElementById('sIco').textContent=mode==='Google'?'✅':'🎉';
+  document.getElementById('sBadge').textContent=mode==='Google'?'Signed in via Google':'Account Created';
+  document.getElementById('sTitle').textContent='Welcome, '+name.split(' ')[0]+'!';
+  document.getElementById('sSub').textContent='You\'re all set. Taking you to food rescue…';
+  let s=2;
+  const t=setInterval(()=>{
+    s--;
+    document.getElementById('rdTxt').textContent='Redirecting in '+s+'s…';
+    if(s<=0){clearInterval(t);window.location.href='/order';}
+  },1000);
+}
+
+function showErr(m){const e=document.getElementById('errMsg');e.textContent=m;e.style.displa
